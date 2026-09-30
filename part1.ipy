@@ -1,0 +1,9 @@
+class song():
+    def __init__ (self, title, artist, genre, duration_sec):
+        self.title
+        self.artist
+        self.genre
+        self.duration_sec
+
+    def summury(self):
+        print(self.title, self.artist, self.genre, self.duration_sec)
