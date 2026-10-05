@@ -14,14 +14,14 @@ songs = [
     ("Circus Heart", "Kalea Voss", "Synthpop", 205), 
     ("Dust and Static", "Nightjar", "Indie Rock", 233), 
 ]
-
+# Initialize the random number generator with the team seed to ensure reproducibility of the generated data
 listeners = [("L101", "Priya N.", "Salisbury"), ("L102", "Marcus T.", "Ocean City"),
              ("L103", "Wei L.", "Cambridge"), ("L104", "Ava R.", "Salisbury"),
              ("L105", "Diego F.", "Easton")]
-
+# Initialize the list that will hold all generated streaming log lines
 lines =[]
 
-# Loop 
+# Loop to generate 400 random streaming log entries
 for _ in range (400):
     lid, lname, city = random.choice(listeners)
     title, artist, genre, dur = random.choice(songs)
@@ -46,11 +46,10 @@ for _ in range(60):
         parts = lines[i].split(" | ")
         parts[-1] = "N/A"
         lines[i] = " | ".join(parts)
-
+# Shuffle the lines to further randomize the order before writing to the file
 random.shuffle(lines)
 with open("streambeats_log.txt", "w") as f:
     for line in lines:
-        for line in lines:
-            print(line, file=f)
+        print(line, file=f)
 
             
