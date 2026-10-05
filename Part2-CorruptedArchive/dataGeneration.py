@@ -1,7 +1,7 @@
 import random 
 
 # declare team name and seed
-TEAM_SEED = "Fantastic Four"
+TEAM_SEED = "Fantastic4"
 random.seed(TEAM_SEED)
 
 # define songs, listeners and initiliaze lines
@@ -27,3 +27,30 @@ for _ in range (400):
     title, artist, genre, dur = random.choice(songs)
     hour = random.randint(0,23)
     day = random.randint(1,28)
+    played = random.randint(20,dur)
+    line = (f"{lid} | {lname} | {title} | {artist} | "
+            f"2026-03-{day:02d} {hour:02d}:00 | {played}")
+    lines.append(line)
+
+#Corrupt ~15% of the lines to simulate crash damage
+for _ in range(60):
+    i = random.randrange(len(lines))
+    kind = random.choice(["blank", "missing_field", "bad_number"])
+    if kind == "blank":
+        lines[i] = ""
+    elif kind == "missing_field":
+        parts = lines[i].split(" | ")
+        del parts[random.randrange(len(parts))]
+        lines[i] = " | ".join(parts)
+    else:
+        parts = lines[i].split(" | ")
+        parts[-1] = "N/A"
+        lines[i] = " | ".join(parts)
+
+random.shuffle(lines)
+with open("streambeats_log.txt", "w") as f:
+    for line in lines:
+        for line in lines:
+            print(line, file=f)
+
+            
